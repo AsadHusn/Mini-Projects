@@ -1,0 +1,8 @@
+<script>
+    const data = {name: 'Ronn', age: 27};              //sample json
+    const a = document.createElement('a');
+    const blob = new Blob([JSON.stringify(data)]);
+    a.href = URL.createObjectURL(blob);
+    a.download = 'sample-profile';                     //filename to download
+    a.click();
+</script>

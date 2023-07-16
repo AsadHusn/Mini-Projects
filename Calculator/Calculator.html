@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    *{
+      font-family: inter, sans-serif;
+    }
+    body{
+      box-sizing: border-box;
+      margin: 0%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 100vh;
+      background-color: #f7f7f7;
+      overflow-x: hidden;
+    }
+    button{
+      font-size: 3rem;
+      border: none;
+      outline: thin solid #aaa;
+      cursor: pointer;
+    }
+    button:active{
+      transform: scale(0.98);
+    }
+    
+    #disp{
+      /* grid-column-start: 1;
+      grid-column-end: 5; */
+      /* grid-column: 1 / span 4; */
+      grid-area: 1 / 1 / 1 / span 4;
+      height: 5rem;
+      font-size: 5rem;
+      text-align: right;
+      align-self: center;
+      padding: 0 1rem;
+    }
+    #ans{
+      grid-area: 2 / 1 / 2 / span 4;
+      font-size: 5rem;
+      text-align: right;
+      align-self: center;
+      padding: 0 1rem;
+    }
+    .operator{
+      color: white;
+      background-color: hsl(25 95% 55% / 1);
+    }
+    .operator.trigger{
+      background-color: hsl(20 90% 50% / 1);
+    }
+    .zero{
+      grid-column: 1/3;
+    }
+  </style>
+</head>
+<body>
+  <div id="disp"></div>
+  <button id="ac">AC</button>
+  <button class="symbol">+/-</button>
+  <button class="symbol">%</button>
+  <button class="operator">/</button>
+  
+  <button>7</button>
+  <button>8</button>
+  <button>9</button>
+  <button class="operator">x</button>
+  
+  <button>4</button>
+  <button>5</button>
+  <button>6</button>
+  <button class="operator">-</button>
+  
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button class="operator">+</button>
+  
+  <button class="zero">0</button>
+  <button>.</button>
+  <button id="equal" class="operator">=</button>
+  
+  <script>
+    disp = document.getElementById('disp')
+    
+    btn = document.querySelectorAll('button:not(#ac)')
+    trigger = false
+    btn.forEach(elem=> elem.onclick = e=> {
+      if(elem.classList.contains('operator') || elem.classList.contains('symbol')){
+        switch(trigger){
+          case false:
+          op = elem.innerText
+          switch(op){
+            case '=': return
+            case '+/-':
+            if(disp.innerText) disp.innerText = -disp.innerText
+            return
+            case '%':
+            if(disp.innerText) disp.innerText = disp.innerText/100
+            return
+          }
+          console.log(op)
+          trigger = true
+          elem.classList.add('trigger')
+          break
+          case true:
+          [a, b] = disp.innerText.split(op, 2)
+          if(elem.innerText == '+/-'){
+            disp.innerText = a + op + -b
+            return
+          }
+          switch(op){
+            case '+':
+            ans = +a + +b
+            break
+            case '-':
+            ans = +a - +b
+            break
+            case 'x':
+            ans = b? +a * +b : a
+            break
+            case '/':
+            ans = b? +a/+b : a
+            break
+            case '=': break
+            default: return
+          }
+          disp.innerText = ans
+          trigger = false
+          document.querySelector('.trigger').classList.remove('trigger')
+          return
+        }
+      }
+      
+      if(disp.innerText=='0' && !elem.classList.contains('operator')){
+        disp.innerText = elem.innerText
+      }else{
+        disp.innerText += elem.innerText
+      }
+    })
+    
+    ac = document.getElementById('ac').onclick = e=> {
+      disp.textContent=null
+      trigger=false
+      t = document.querySelector('.trigger')
+      if(t) t.classList.remove('trigger')
+    }
+    
+  </script>
+</body>
+</html>

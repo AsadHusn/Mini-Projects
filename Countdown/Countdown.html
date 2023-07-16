@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CountDown</title>
+  <style>
+    body{
+      background-color: rgb(2,0,36);
+      background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
+      font-family: 'Poppins';
+      box-sizing: border-box;
+      padding: 2%;
+      color: #eee;
+    }
+    body > h1{
+      font-size: 3rem;
+      font-weight: normal;
+      text-align: center;
+      text-shadow: 0 1px 2px black;
+    }
+    main{
+      padding: 5%;
+      display: grid;
+      justify-items: center;
+      grid-template-rows: auto auto;
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .date{
+      font-size: 12vw;
+      font-weight: bold;
+      text-shadow: 0 0 5px black;
+    }
+    .label{
+      font-size: 3vw;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>New Years Eve</h1>
+  <main>
+    <div id="months" class="date">0</div>
+    <div id="days" class="date">0</div>
+    <div id="hours" class="date">0</div>
+    <div id="minutes" class="date">0</div>
+    <div id="seconds" class="date">0</div>
+    <div class="label">Months</div>
+    <div class="label">Days</div>
+    <div class="label">Hours</div>
+    <div class="label">Minutes</div>
+    <div class="label">Seconds</div>
+  </main>
+  
+  <script>
+
+    nextYear = new Date().getFullYear()+1
+    newYear = Date.parse(new Date(nextYear, 0))
+    countdown = ()=>{
+      currentDate = Date.now()
+      sec = Math.floor((newYear - currentDate) / 1000)
+      
+      min = Math.floor((sec / 60) % 60)
+      hour = Math.floor((sec / 3600) % 24)
+      day = Math.floor((sec / 3600 / 24) % 30)
+      mon = Math.floor((sec / 3600 / 24 / 30) % 12)
+      
+      months.innerText = mon
+      days.innerText = day
+      hours.innerText = hour
+      minutes.innerText = min
+      seconds.innerText = sec % 60
+    }
+    countdown()
+    setInterval(countdown, 1000)
+
+    // simple logic
+    // kal = Date.parse(new Date(2022, 10, 23))
+    // aaj = Date.parse(Date())
+    // sec = (ka-aaj) / 1000
+    // mins = (sec / 60) % 60
+    // hours = (sec / 60 / 60) % 24   ||  (sec/(60*60)) % 24
+    // day = (sec / 60 / 60 / 24) % 30
+  </script>
+  
+</body>
+</html>

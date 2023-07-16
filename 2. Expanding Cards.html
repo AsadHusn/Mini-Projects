@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expanding Cards</title>
+    <style>
+        .container{
+            width: 80%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            /* border: thin solid black; */
+        }
+        .panel{
+            position: relative;
+            color: white;
+            /* border: thin solid red; */
+            height: 80vh;
+            border-radius: 60px;
+            cursor: pointer;
+            margin: 10px;
+            width: 10%;
+            transition: flex 0.5s ease-in;
+        }
+        .panel.active{
+            flex: auto;
+        }
+        .panel h3{
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            opacity: 0;
+        }
+        .panel.active h3{
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="panel active" style="background-color: blueviolet">
+            <h3>Explore the world</h3>
+        </div>
+        <div class="panel" style="background-color: brown;">
+            <h3>Explore the world</h3>
+        </div>
+        <div class="panel" style="background-color: coral;">
+            <h3>Explore the world</h3>
+        </div>
+        <div class="panel" style="background-color: darkolivegreen;">
+            <h3>Explore the world</h3>
+        </div>
+        <div class="panel" style="background-color: forestgreen;">
+            <h3>Explore the world</h3>
+        </div>
+    </div>
+
+    <script>
+        panels = document.getElementsByClassName("panel")
+        for (panel of panels) {
+            panel.addEventListener("click", function () {
+                for (p of panels)
+                    p.classList.remove("active")
+                this.classList.add("active")
+            })
+        }
+    </script>
+</body>
+</html>

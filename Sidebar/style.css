@@ -1,0 +1,87 @@
+<style>
+    body{
+      font-family: inter;
+      margin: 0;
+    }
+    button:first-child{
+      position: fixed;
+      top: 2rem;
+      right: 3rem;
+      animation: bounce 2s ease-in-out infinite;
+      transition: 0.3s;
+    }
+    @keyframes bounce {
+      0%{
+        transform: scale(1);
+      }
+      50%{
+        transform: scale(1.5);
+      }
+      100%{
+        transform: scale(1);
+      }
+    }
+    aside{
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      row-gap: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: thin solid black;
+      background-color: lightgray;
+      translate: -100%;
+      transition: 0.5s;
+    }
+    header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border: thin solid red;
+      overflow: hidden;
+    }
+    header button{
+      width: fit-content;
+    }
+    button:nth-child(2){
+      font-size: 1.75rem;
+    }
+    ul{
+      list-style-type: none;
+      padding: 0;
+      font-size: 1.5rem;
+      border: thin solid red;
+    }
+    ul li{
+      cursor: pointer;
+    }
+    ul.links li{
+      padding: 1rem 1.5rem;
+      transition: 0.3s;
+      background-color: hsl(210, 22%, 49%);
+      color: white;
+    }
+    ul.links li:hover{
+      background-color: hsl(205, 86%, 70%);
+      padding-left: 1.75rem;
+    }
+    ul.social{
+      display: flex;
+      justify-self: center;
+      margin-bottom: 2rem;
+    }
+    ul.social li{
+      padding: 0 0.5rem;
+    }
+    .show{
+      translate: 0;
+    }
+    @media screen and (min-width:768px) {
+      aside{
+        width: 400px;
+      }
+    }
+  </style>

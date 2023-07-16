@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar</title>
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+  <style>
+    body{
+      margin: 0;
+      font-family: inter, sans-serif;
+      height: 100vh;
+    }
+    i.fa{
+      cursor: pointer;
+    }
+    #toggle{
+      position: fixed;
+      top: 2rem;
+      right: 3rem;
+      font-size: 2rem;
+      animation: bounce 2s ease-in-out none infinite normal;
+    }
+    @keyframes bounce{
+      50%{
+        transform: scale(1.5);
+      }
+    }
+    aside{
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      background-color: lightgray;
+      position: fixed;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transition: 0.5s;
+      translate: -100%;
+    }
+    aside header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+    #close{
+      font-size: 2rem;
+      color: rgb(250, 0, 0);
+    }
+    ul{
+      list-style-type: none;
+      padding: 0;
+    }
+    ul li{
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    ul li:hover{
+      background-color: hsl(205, 86%, 70%);
+      transition: 0.5s;
+    }
+    ul.links li{
+      padding: 1rem 2.5rem;
+    }
+    ul.links li:hover{
+      padding-left: 3rem;
+    }
+    ul.social{
+      display: flex;
+      justify-self: center;
+      align-items: center;
+    }
+    ul.social li{
+      padding: 0.5rem;
+    }
+    .show{
+      translate: 0;
+    }
+    @media screen and (min-width:768px){
+      aside{
+        width: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <i id="toggle" class="fa fa-bars"></i>
+  <aside id="sidebar">
+    <header>
+      <h2>Sidebar</h2>
+      <i id="close" class="fa fa-times"></i>
+    </header>
+    <ul class="links">
+      <li>One</li>
+      <li>Two</li>
+      <li>Three</li>
+      <li>Four</li>
+      <li>Five</li>
+    </ul>
+    <ul class="social">
+      <li><i class="fab fa-facebook"></i></li>
+      <li><i class="fab fa-twitter"></i></li>
+      <li><i class="fab fa-linkedin"></i></li>
+      <li><i class="fab fa-sketch"></i></li>
+      <li><i class="fab fa-behance"></i></li>
+    </ul>
+  </aside>
+  
+  <script>
+    document.getElementById('toggle').onclick = e=>sidebar.classList.toggle('show')
+    document.getElementById('close').onclick = e=>sidebar.classList.toggle('show')
+    document.body.onclick = e=> e.clientX>400 && e.target!=toggle && sidebar.classList.remove('show')
+    
+  </script>
+</body>
+</html>

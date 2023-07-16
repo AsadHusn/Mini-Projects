@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./js-confetti.browser.js"></script>
+  <title>Tenzies</title>
+  <style>
+    body{
+      font-family: 'poppins', 'sans-serif';
+      font-size: 1.5em;
+      text-align: center;
+      color: white;
+      background-color: #555;
+    }
+    .dice-container{
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+      row-gap: 10px;
+      justify-content: space-evenly;
+    }
+    .die-box{
+      width: 50px;
+      height: 50px;
+      background-color: #333;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 50px;
+      cursor: pointer;
+    }
+    .die-box.selected{
+      background-color: red;
+    }
+    button{
+      margin-top: 1em;
+      width: 20%;
+      font-size: inherit;
+      font-family: inherit;
+      background-color: #222;
+      color: inherit;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    button:active, .die-box:active{
+      transform: scale(0.96);
+    }
+    
+  </style>
+</head>
+<body>
+  <h1>Tenzies</h1>
+  <div class="dice-container"></div>
+  <button type="button"></button>
+  
+  
+  <script>
+    function allNewDice(){
+      container = document.querySelector('.dice-container')
+      container.replaceChildren()
+      for(let i=0; i<10; i++){
+        n = Math.ceil(Math.random() * 6)
+        container.innerHTML += `<h2 class="die-box">${n}</h2>`
+      }
+      btn = document.querySelector('button')
+      btn.innerText = 'Roll Dice'
+      btn.onclick = rollDice
+      holdDice()
+    }
+    
+    function rollDice(){
+      unselected = document.querySelectorAll('.die-box:not(.selected)')
+      unselected.forEach(item=>{
+        item.innerText = Math.ceil(Math.random() * 6)
+      })
+    }
+    
+    function holdDice(){
+      dice = document.getElementsByClassName('die-box')
+      for(die of dice){
+        die.onclick = e=> {
+          e.target.classList.toggle("selected")
+          unselected = document.querySelectorAll('.die-box:not(.selected)')
+          if(!unselected.length){
+            selected = document.querySelectorAll('.die-box')
+            list = []
+            selected.forEach(elem=> list.push(elem.innerText))
+            if(list.every(n=> n==list[0])){
+              new JSConfetti().addConfetti()
+              btn = document.querySelector('button')
+              btn.innerText = 'New Game'
+              btn.onclick = allNewDice
+            }
+          }
+        }
+      }
+    }
+    
+    allNewDice()
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="emojiList.js"></script>
+  <title>Emojies</title>
+  <style>
+    body{
+      font-family: Poppins,sans-serif;
+      color: #444;
+      background-color: #f5f5f5;
+    }
+    h1{
+      font-size: 4rem;
+      text-align: center;
+    }
+    form{
+      position: sticky;
+      top: 2%;
+      box-shadow: 0 1px 4px;
+    }
+    input[type='text']{
+      border: none;
+      box-sizing: border-box;
+      width: 100%;
+      color: inherit;
+      font-size: 2rem;
+      padding: 1rem 2rem;
+    }
+    input[type='text']::placeholder{
+      color: #d5d5d5;
+    }
+    ul{
+      list-style-type: none;
+      background-color: white;
+      padding: 0;
+    }
+    ul li{
+      border-top: thin solid #e5e5e5;
+      cursor: pointer;
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+    }
+    .more{
+      font-size: inherit;
+      font-family: inherit;
+      padding: 0 1rem;
+      border-radius: 6px;
+      display: block;
+      margin: 1rem auto;
+      cursor: pointer;
+    }
+    .tooltip{
+      text-align: center;
+      background-color: #ccc;
+    }
+    @media (min-width: 768px) {
+      form, ul{
+        width: 500px;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Emojies</h1>
+  <form onsubmit="return false" oncontextmenu="return false">
+    <input type="text" name="search" placeholder="Search" autocomplete="off" autofocus oninput="load(this)">
+    <div class="tooltip"></div>
+  </form>
+  <ul></ul>
+  <button class="more" onclick="load()">More</button>
+  
+  <script>
+    ul = document.querySelector('ul')
+    tooltip = document.querySelector('.tooltip')
+    result = -20
+    function load(e={}){
+      if(!e.value){
+        result =  e.value==undefined? result+20: 0
+      }else{
+        ul.textContent = null
+        result = 0
+      }
+      limit = 0
+      for(i=result; i<emojiList.length && limit<20; i++){
+        if(emojiList[i].title.search(RegExp(e.value, 'i')) >= 0 || emojiList[i].keywords.search(RegExp(e.value, 'i')) >= 0){
+          ul.innerHTML += `<li><span>${emojiList[i].symbol}</span> ${emojiList[i].title}</li>`
+          limit++
+        }
+      }
+      
+      for(child of ul.children){
+        child.onclick = e=> {
+          navigator.clipboard.writeText(e.target.firstChild.innerText)
+          tooltip.innerText =  `${e.target.firstChild.innerText} Copied`
+          setTimeout(() => {
+            tooltip.textContent = null
+          }, 700);
+        }
+      }
+    }
+    
+    load()
+    
+  </script> 
+</body>
+</html>

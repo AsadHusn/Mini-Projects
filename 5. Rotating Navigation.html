@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../fontawesome-free-6.1.1-web/css/all.min.css">
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+        .container{
+            background-color: whitesmoke;
+        }
+
+        
+        .circle{
+            z-index: 1;
+            background-color: #ff7979;
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            position: fixed;
+            top: -100px;
+            left: -100px;
+            transition: 0.6s;
+        }
+
+        .circle button{
+            cursor: pointer;
+            position: absolute;
+            top: 66%;
+            left: 60%;
+            border: 0;
+            background-color: transparent;
+            font-size: 26px;
+            color: white;
+        }
+
+        .circle button#close{
+            transform: rotate(-20deg);
+            left: 30%;
+        }
+
+        .container.show-nav .circle{
+            transform: rotate(-70deg);
+        }
+
+        .content{
+            background-color: white;
+            max-width: 75%;
+            margin: auto;
+            padding: 10%;
+            transform-origin: top left;
+            transition: 0.5s;
+        }
+        .container.show-nav .content{
+            transform: rotate(-20deg);
+        }
+
+        img{
+            max-width: 100%;
+        }
+
+        nav{
+            position: fixed;
+            bottom: 15%;
+            transform: translateX(-105%);
+            transition: 0.5s;
+        }
+        nav ul{
+            list-style-type: none;
+        }
+        nav ul li{
+            margin: 20px 0;
+        }
+
+        nav ul li + li{
+            margin-left: 30px;
+        }
+        nav ul li + li + li{
+            margin-left: 50px;
+        }
+
+        nav ul li i{
+            font-size: large;
+        }
+
+        .container.show-nav + nav{
+            transform: translateX(0);
+        }
+
+
+        
+
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="circle">
+            <button id="close">
+                <i class="fas fa-times"></i>
+            </button>
+            <button id="open">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="content">
+            <h1>Amazing Article</h1>
+            <small>John Doe</small>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa cumque voluptates cum inventore aliquam. Esse tenetur alias itaque rerum aliquam eligendi? Non, ex quisquam at dignissimos eaque quia, hic odit similique nostrum aliquid odio magnam, optio cumque? Inventore omnis alias recusandae delectus quaerat modi laborum dolor quis id! Consequuntur vel quis nihil, sequi ullam magnam. Libero corrupti accusamus dicta neque voluptatibus praesentium eos totam, accusantium, illo numquam laborum, minima perferendis quam vero adipisci quo natus. Asperiores, quam beatae. Consequuntur eum asperiores cupiditate, itaque vero ea reprehenderit minus illo ipsam deleniti beatae iure porro aperiam reiciendis quia aliquam commodi voluptatibus nobis. Tenetur soluta sapiente non voluptatum minima rerum recusandae dicta culpa esse animi maxime a vero suscipit dolor, consectetur quos fugit, et est eius. Doloribus nostrum earum asperiores ipsum provident odio, necessitatibus, dolore pariatur nobis, soluta totam quisquam facere nihil repudiandae illo eum! Cupiditate enim eius, magni beatae placeat aliquid aperiam sed ea, in cumque laborum nesciunt accusamus quod, quidem libero pariatur maxime natus? Facilis a ullam explicabo sint iure. Nemo amet soluta veniam saepe possimus harum dignissimos maiores praesentium quo nesciunt doloribus recusandae, cumque officia, a provident! Nihil cumque, distinctio est inventore, provident veniam modi ad quae, facilis vero quibusdam!</p>
+            <h2>My Subtitle</h2>
+            <img src="girl.jpg">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos eius veritatis nihil voluptatum ratione corrupti deserunt, labore aperiam sed cum sunt possimus. Amet facilis cumque expedita eaque nostrum hic possimus dicta aliquid reiciendis dolor dolorem vitae iure quas similique tempore error magnam quibusdam, quaerat unde nemo corporis veritatis! Itaque repudiandae culpa minima maiores cumque eius reprehenderit illum similique, sequi placeat, labore quos rerum veritatis sapiente fugit saepe provident autem modi non possimus earum rem, consectetur adipisci nostrum. Nihil, explicabo quas temporibus dolor fugit repellendus praesentium eligendi ex doloribus nostrum adipisci quam recusandae. Laudantium deleniti neque cum reprehenderit id omnis excepturi, ex tempora commodi nam delectus soluta illum minima ipsum aspernatur eligendi odit consequuntur architecto, sed laboriosam vel sunt magnam labore pariatur? Sit earum repellat obcaecati assumenda, modi cum unde impedit nisi iusto repudiandae officia, illo quod! Illo minima aliquid delectus maxime praesentium architecto consequuntur! Veniam in sit tempore omnis? Suscipit?</p>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><i class="fas fa-home"> Home</i></li>
+            <li><i class="fas fa-user-alt"> About</i></li>
+            <li><i class="fas fa-envelope"> Contact</i></li>
+        </ul>
+    </nav>
+    <script>
+        const open = document.getElementById("open");
+        const close = document.getElementById("close");
+        const container = document.querySelector(".container");
+        
+        open.addEventListener("click", () => container.classList.add("show-nav"));
+        close.addEventListener("click", () => container.classList.remove("show-nav"));
+        
+    </script>
+    
+</body>
+</html>

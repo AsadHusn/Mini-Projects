@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            height: 100vh;
+            margin: auto;
+            display: flex;
+        }
+        
+        .container {
+            width: 500px;
+            margin: auto;
+            text-align: center;
+            border:  thin solid black;
+        }
+        
+        .progress {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            
+        }
+        
+        .bar,
+        .success {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            height: 4px;
+        }
+        
+        .bar {
+            width: 100%;
+            background-color: rgb(79, 79, 90);
+            z-index: -2;
+        }
+        
+        .success {
+            width: 0%;
+            background-color: aqua;
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .circle {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background-color: burlywood;
+            border: thin solid black;
+            border-radius: 50%;
+            
+        }
+        
+        .circle.active {
+            background-color: rgb(0, 119, 255);
+            transition: 0.8s;
+            color: white;
+        }
+        
+        button {
+            width: 130px;
+            height: 30px;
+            margin: 15px;
+            padding: 8px 30px;
+            background-color: rgb(19, 126, 248);
+            border: 0;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        button:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="progress">
+            <div class="bar"></div>
+            <div class="success"></div>
+            <div class="circle active">1</div>
+            <div class="circle">2</div>
+            <div class="circle">3</div>
+            <div class="circle">4</div>
+            <div class="circle">5</div>
+        </div>
+        <button class="prev" disabled>Previous</button>
+        <button class="next">Next</button>
+    </div>
+    
+    <script>
+        success = document.querySelector(".success")
+        circles = document.querySelectorAll(".circle")
+        next = document.querySelector(".next")
+        prev = document.querySelector(".prev")
+        bar = 1
+        
+        next.addEventListener("click", () => {
+            if (bar < circles.length) {
+                circles[bar++].classList.add("active")
+                prev.disabled = false
+                success.style.width = (bar - 1) * 25 + "%"
+            }
+            if (bar == circles.length)
+            next.disabled = true
+        })
+        
+        prev.addEventListener("click", () => {
+            if (bar > 1) {
+                circles[--bar].classList.remove("active")
+                next.disabled = false
+                success.style.width = (bar - 1) * 25 + "%"
+            }
+            if (bar == 1)
+            prev.disabled = true
+        })
+    </script>
+    
+</body>
+</html>

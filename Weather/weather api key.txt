@@ -1,0 +1,14 @@
+2d1f27ad2ec2408bbd4181341220712
+
+https://api.weatherapi.com/v1/current.json?key=2d1f27ad2ec2408bbd4181341220712&q=Lahore&aqi=yes
+
+https://api.weatherapi.com/v1/current.json?key=2d1f27ad2ec2408bbd4181341220712&q=Lahore&aqi=no
+
+forcast
+https://api.weatherapi.com/v1/forecast.json?key=2d1f27ad2ec2408bbd4181341220712&q=Lahore&days=1&aqi=no&alerts=no
+
+autocomplete
+https://api.weatherapi.com/v1/search.json?key=2d1f27ad2ec2408bbd4181341220712&q=Lahore
+
+https://api.weatherapi.com/v1/astronomy.json?key=2d1f27ad2ec2408bbd4181341220712&q=Lahore&dt=2022-12-08
+
